@@ -1,0 +1,28 @@
+<div class="main-video-container">
+  <figure class="video-container" [ngClass]="{'in-fullscreen': isUserInFullScreen()}" #videoContainer>
+    <video class="video-player" controls #player></video>
+
+    <div class="player-controls" *ngIf="playerIsReady" [ngClass]="{'state-playing': !videoElement.paused}">
+      <div class="player-control-progress">
+        <progress class="progress" value="0" min="0" #progressElement
+        (click)="skipAhead($event)"></progress>
+      </div>
+
+      <div class="player-control-buttons">
+        <button (click)="playOrPauseVideo()"> {{ videoElement.paused ? 'Play' : 'Pause' }} </button>
+        <button (click)="muteOrUnmuteVideo()"> {{ videoElement.muted ? 'Unmute' : 'Mute' }} </button>
+        <span class="player-time"> {{convertTime(videoElement.currentTime || 0)}} / {{convertTime(videoElement.duration || 0)}} </span>
+        <button (click)="nextStream()" [disabled]="!isNextStreamAvaliable()"> Next Stream </button>
+
+        <span class="move-right">
+          <button (click)="setFullScreen()"> {{ isUserInFullScreen() ? 'Exit Full Screen' : 'Full Screen' }} </button>
+        </span>
+      </div>
+    </div>
+ </figure>
+
+ <h2> Playing: {{ currentStream?.name }} </h2>
+ <h4 *ngIf="errormessage" class="text-red errormessage"> Error: {{errormessage}} </h4>
+
+ <div class="cmcd-debug-ele" #cmcdDebugEle></div>
+</div>

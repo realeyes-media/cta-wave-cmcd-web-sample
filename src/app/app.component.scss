@@ -1,0 +1,15 @@
+
+.container {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.item {
+  margin-left: 1rem;
+}
+
+@media (max-width: 800px) {
+  .container {
+    flex-direction: column;
+  }
+}
