@@ -55,7 +55,7 @@ jobs:
         uses: google-github-actions/upload-cloud-storage@main
         with:
           credentials: ${{ secrets.gcp_credentials }}
-          path: dist/
+          path: 'dist/hlsvideoplayer'
           destination: ${{ env.GCS_BUCKET_DEV }}         
 
       - name: Upload to gcs  
@@ -64,7 +64,7 @@ jobs:
         uses: google-github-actions/upload-cloud-storage@main
         with:
           credentials: ${{ secrets.gcp_credentials }}
-          path: dist/
+          path: 'dist/hlsvideoplayer/**'
           destination: ${{ env.GCS_BUCKET_STAGING }}
 
       - name: Upload to gcs  
@@ -73,5 +73,5 @@ jobs:
         uses: google-github-actions/upload-cloud-storage@main
         with:
           credentials: ${{ secrets.gcp_credentials }}
-          path: dist/
+          path: 'dist/hlsvideoplayer'
           destination: ${{ env.GCS_BUCKET_PROD }}      
