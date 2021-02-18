@@ -56,7 +56,7 @@ jobs:
         with:
           credentials: ${{ secrets.gcp_credentials }}
           path: dist/
-          destination: $GCS_BUCKET_DEV           
+          destination: env.GCS_BUCKET_DEV           
 
       - name: Upload to gcs  
         if: github.ref == 'refs/heads/staging'
@@ -65,7 +65,7 @@ jobs:
         with:
           credentials: ${{ secrets.gcp_credentials }}
           path: dist/
-          destination: $GCS_BUCKET_STAGING
+          destination: env.GCS_BUCKET_STAGING
 
       - name: Upload to gcs  
         if: github.ref == 'refs/heads/main'
@@ -74,4 +74,4 @@ jobs:
         with:
           credentials: ${{ secrets.gcp_credentials }}
           path: dist/
-          destination: $GCS_BUCKET_PROD       
+          destination: env.GCS_BUCKET_PROD       
