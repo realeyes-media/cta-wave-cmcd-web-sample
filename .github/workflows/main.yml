@@ -52,27 +52,14 @@ jobs:
       - name: Upload to gcs  
         if: github.ref == 'refs/heads/dev'
         run: |-
-          gsutil -m rsync -R dist/hlsvideoplayer gs://${{ env.GCS_BUCKET_DEV }}
-        # uses: google-github-actions/upload-cloud-storage@main
-        # with:
-        #   credentials: ${{ secrets.gcp_credentials }}
-        #   path: 'dist/hlsvideoplayer/*'
-        #   destination: ${{ env.GCS_BUCKET_DEV }}         
+          gsutil -m rsync -R dist/hlsvideoplayer gs://${{ env.GCS_BUCKET_DEV }}        
 
       - name: Upload to gcs  
         if: github.ref == 'refs/heads/staging'
-        id: upload-file-staging
-        uses: google-github-actions/upload-cloud-storage@main
-        with:
-          credentials: ${{ secrets.gcp_credentials }}
-          path: 'dist/hlsvideoplayer/**'
-          destination: ${{ env.GCS_BUCKET_STAGING }}
+        run: |-
+          gsutil -m rsync -R dist/hlsvideoplayer gs://${{ env.GCS_BUCKET_STAGING }} 
 
       - name: Upload to gcs  
         if: github.ref == 'refs/heads/main'
-        id: upload-file-prod
-        uses: google-github-actions/upload-cloud-storage@main
-        with:
-          credentials: ${{ secrets.gcp_credentials }}
-          path: 'dist/hlsvideoplayer'
-          destination: ${{ env.GCS_BUCKET_PROD }}      
+        run: |-
+          gsutil -m rsync -R dist/hlsvideoplayer gs://${{ env.GCS_BUCKET_PROD }}
