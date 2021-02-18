@@ -51,7 +51,7 @@ jobs:
 
       - name: Upload to gcs  
         if: github.ref == 'refs/heads/dev'
-        id: upload-file
+        id: upload-file-dev
         uses: google-github-actions/upload-cloud-storage@main
         with:
           credentials: ${{ secrets.gcp_credentials }}
@@ -60,7 +60,7 @@ jobs:
 
       - name: Upload to gcs  
         if: github.ref == 'refs/heads/staging'
-        id: upload-file
+        id: upload-file-staging
         uses: google-github-actions/upload-cloud-storage@main
         with:
           credentials: ${{ secrets.gcp_credentials }}
@@ -69,7 +69,7 @@ jobs:
 
       - name: Upload to gcs  
         if: github.ref == 'refs/heads/main'
-        id: upload-file
+        id: upload-file-prod
         uses: google-github-actions/upload-cloud-storage@main
         with:
           credentials: ${{ secrets.gcp_credentials }}
