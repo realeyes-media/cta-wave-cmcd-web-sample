@@ -51,12 +51,13 @@ jobs:
 
       - name: Upload to gcs  
         if: github.ref == 'refs/heads/dev'
-        id: upload-file-dev
-        uses: google-github-actions/upload-cloud-storage@main
-        with:
-          credentials: ${{ secrets.gcp_credentials }}
-          path: 'dist/hlsvideoplayer/*'
-          destination: ${{ env.GCS_BUCKET_DEV }}         
+        run: |-
+          gsutil -m rsync -R dist/hlsvideoplayer gs://${{ env.GCS_BUCKET_DEV }}
+        # uses: google-github-actions/upload-cloud-storage@main
+        # with:
+        #   credentials: ${{ secrets.gcp_credentials }}
+        #   path: 'dist/hlsvideoplayer/*'
+        #   destination: ${{ env.GCS_BUCKET_DEV }}         
 
       - name: Upload to gcs  
         if: github.ref == 'refs/heads/staging'
